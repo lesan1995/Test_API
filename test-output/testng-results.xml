@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2018-03-24T14:47:52Z" name="Default suite" finished-at="2018-03-24T14:47:57Z" duration-ms="5189">
+    <groups>
+    </groups>
+    <test started-at="2018-03-24T14:47:52Z" name="Default test" finished-at="2018-03-24T14:47:57Z" duration-ms="5189">
+      <class name="test_case.TC_Login">
+        <test-method is-config="true" signature="beforeMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:test_case.TC_Login@34f7cfd9]" started-at="2018-03-24T21:47:52Z" name="beforeMethod" finished-at="2018-03-24T21:47:57Z" duration-ms="4476" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[http://35.174.137.190]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[api/v1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[rohan.ana@example.com]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[123123123]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifyUserCanLoginWithValidData()[pri:0, instance:test_case.TC_Login@34f7cfd9]" started-at="2018-03-24T21:47:57Z" name="verifyUserCanLoginWithValidData" finished-at="2018-03-24T21:47:57Z" duration-ms="629" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyUserCanLoginWithValidData -->
+      </class> <!-- test_case.TC_Login -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Test-Suite">
+	<test name="test">
+		<parameter name="APP_URL" value="http://35.174.137.190" />
+		<parameter name="API_PREFIX" value="api/v1" />
+		<parameter name="AUTH_EMAIL" value="rohan.ana@example.com" />
+		<parameter name="AUTH_PASSWORD" value="123123123" />
+		<classes>
+			<class name="test_case.TC_Login" />
+		</classes>
+	</test>
+</suite>
