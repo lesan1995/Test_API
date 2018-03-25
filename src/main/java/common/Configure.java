@@ -77,6 +77,11 @@ public class Configure {
 		}
 		
 		Response respo=Action.getInstance().Method(method.trim(),path.trim(),header,token, body);
+		if(respo==null) {
+			ExcelUtils.WriteResult(row, "", "SKIP");
+			System.out.println("SKIP");
+			return;
+		}
 		
 		String codeActual=respo.getStatusCode()+"";
 		String messageActual;

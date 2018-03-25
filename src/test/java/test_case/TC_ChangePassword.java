@@ -32,7 +32,7 @@ public class TC_ChangePassword extends Configure {
 	public Object[][] validData() throws Exception {
 		Object[][] testObjArray = null;
 		try {
-			testObjArray = ExcelUtils.getTableArray("src/main/java/data/API.xlsx", "ChangePassword");
+			testObjArray = ExcelUtils.getTableArray("src/main/java/data/API.xlsx", "Logout");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

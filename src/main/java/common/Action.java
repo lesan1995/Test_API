@@ -57,13 +57,21 @@ public class Action {
 	 * @return response
 	 */
 	public Response POST(String path,String contentType,String token,String body) {
-		Response response = given()
-				.when()
-				.headers("Authorization","bearer "+token,"Content-Type", contentType)
-				.body(body)
-				.post(path)
-				.thenReturn();
-		return response;
+		try {
+			Response response = given()
+					.when()
+					.headers("Authorization","bearer "+token,"Content-Type", contentType)
+					.body(body)
+					.post(path)
+					.thenReturn();
+			return response;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+			// TODO: handle exception
+		}
+		
 	}
 	/**
 	 * Method get to server
@@ -73,13 +81,21 @@ public class Action {
 	 * @return
 	 */
 	public Response GET(String path,String contentType,String token,String body) {
-		Response response = given()
-				.when()
-				.headers("Authorization","bearer "+token,"Content-Type", contentType)
-				.body(body)
-				.get(path)
-				.thenReturn();
-		return response;
+		try {
+			Response response = given()
+					.when()
+					.headers("Authorization","bearer "+token,"Content-Type", contentType)
+					.body(body)
+					.get(path)
+					.thenReturn();
+			return response;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+			// TODO: handle exception
+		}
+		
 	}
 	/**
 	 * Method push to server
@@ -89,13 +105,21 @@ public class Action {
 	 * @return response
 	 */
 	public Response PUT(String path,String contentType,String token,String body) {
-		Response response = given()
-				.when()
-				.headers("Authorization","bearer "+token,"Content-Type", contentType)
-				.body(body)
-				.put(path)
-				.thenReturn();
-		return response;
+		try {
+			Response response = given()
+					.when()
+					.headers("Authorization","bearer "+token,"Content-Type", contentType)
+					.body(body)
+					.put(path)
+					.thenReturn();
+			return response;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+			// TODO: handle exception
+		}
+		
 	}
 	/**
 	 * Method delete to server
@@ -105,13 +129,21 @@ public class Action {
 	 * @return response
 	 */
 	public Response DELETE(String path,String contentType,String token,String body) {
-		Response response = given()
-				.when()
-				.headers("Authorization","bearer "+token,"Content-Type", contentType)
-				.body(body)
-				.delete(path)
-				.thenReturn();
-		return response;
+		try {
+			Response response = given()
+					.when()
+					.headers("Authorization","bearer "+token,"Content-Type", contentType)
+					.body(body)
+					.delete(path)
+					.thenReturn();
+			return response;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+			// TODO: handle exception
+		}
+		
 	}
 	
 }
