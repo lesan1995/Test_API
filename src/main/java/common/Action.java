@@ -2,11 +2,7 @@ package common;
 
 import static io.restassured.RestAssured.given;
 import java.lang.reflect.Method;
-import java.util.Map;
-
 import com.google.gson.JsonObject;
-import io.restassured.http.ContentType;
-import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 
 public class Action {
@@ -29,26 +25,23 @@ public class Action {
 		return jsonObj;
 	}
 	/**
-	 * Excute method request with name methoad, path, header, and model to return
+	 * Excute method request with name method, path, header, and model to return
 	 * @param nameMethod
 	 * @param path of request
 	 * @param header of request
 	 * @param model to return
 	 * @return response
 	 */
-	public Response Method(String nameMethod,String path,String token,Object model) {
+	public Response Method(String nameMethod,String path,String header,String token,String body) {
 		Object o=null;
 		Object oo=null;
+		String contentType=header.substring(header.indexOf(":")+1, header.indexOf("Authorization"));
 		try {
 			Class<?> classBy = Class.forName("common.Action");
 			Method method = classBy.getMethod("getInstance");
-			Method method2=classBy.getMethod(nameMethod, String.class,String.class,Object.class);
+			Method method2=classBy.getMethod(nameMethod, String.class,String.class,String.class,String.class);
 			o=method.invoke(null);
-			oo=method2.invoke(o, path,token,model);
-			
-			
-			//Method method = classBy.getMethod(nameMethod, String.class,Map.class,Object.class);
-			//method.invoke(null, path,header,model);
+			oo=method2.invoke(o, path,contentType.trim(),token,body);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,13 +56,11 @@ public class Action {
 	 * @param model
 	 * @return response
 	 */
-	public Response Post(String path,String token,Object model) {
+	public Response POST(String path,String contentType,String token,String body) {
 		Response response = given()
 				.when()
-				.contentType(ContentType.JSON)
-				.accept(ContentType.JSON)
-				.headers("Authorization","Bearer "+token)
-				.body(model, ObjectMapperType.GSON)
+				.headers("Authorization","bearer "+token,"Content-Type", contentType)
+				.body(body)
 				.post(path)
 				.thenReturn();
 		return response;
@@ -81,13 +72,11 @@ public class Action {
 	 * @param model
 	 * @return
 	 */
-	public Response Get(String path,String token,Object model) {
+	public Response GET(String path,String contentType,String token,String body) {
 		Response response = given()
 				.when()
-				.contentType(ContentType.JSON)
-				.accept(ContentType.JSON)
-				.headers("Authorization","Bearer "+token)
-				.body(model, ObjectMapperType.GSON)
+				.headers("Authorization","bearer "+token,"Content-Type", contentType)
+				.body(body)
 				.get(path)
 				.thenReturn();
 		return response;
@@ -99,13 +88,11 @@ public class Action {
 	 * @param model
 	 * @return response
 	 */
-	public Response Push(String path,String token,Object model) {
+	public Response PUT(String path,String contentType,String token,String body) {
 		Response response = given()
 				.when()
-				.contentType(ContentType.JSON)
-				.accept(ContentType.JSON)
-				.headers("Authorization","Bearer "+token)
-				.body(model, ObjectMapperType.GSON)
+				.headers("Authorization","bearer "+token,"Content-Type", contentType)
+				.body(body)
 				.put(path)
 				.thenReturn();
 		return response;
@@ -117,13 +104,11 @@ public class Action {
 	 * @param model
 	 * @return response
 	 */
-	public Response Delete(String path,String token,Object model) {
+	public Response DELETE(String path,String contentType,String token,String body) {
 		Response response = given()
 				.when()
-				.contentType(ContentType.JSON)
-				.accept(ContentType.JSON)
-				.headers("Authorization","Bearer "+token)
-				.body(model, ObjectMapperType.GSON)
+				.headers("Authorization","bearer "+token,"Content-Type", contentType)
+				.body(body)
 				.delete(path)
 				.thenReturn();
 		return response;

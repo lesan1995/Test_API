@@ -3,7 +3,7 @@ package common;
 import java.io.FileInputStream;
 
 import java.io.FileNotFoundException;
-
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -21,6 +21,8 @@ public class ExcelUtils {
 	private static XSSFWorkbook ExcelWBook;
 
 	private static XSSFCell Cell;
+	
+	private static String filePath;
 
 	@SuppressWarnings("unused")
 	private static XSSFRow Row;
@@ -36,6 +38,7 @@ public class ExcelUtils {
 	public static Object[][] getTableArray(String FilePath, String SheetName) throws Exception {
 
 		String[][] tabArray = null;
+		filePath=FilePath;
 
 		try {
 
@@ -54,9 +57,9 @@ public class ExcelUtils {
 			int ci, cj;
 
 			int totalRows = ExcelWSheet.getLastRowNum();
-//			int totalRows=ExcelWSheet.getPhysicalNumberOfRows()-1;
 			System.out.println("totalRows:"+totalRows);
-			int totalCols=ExcelWSheet.getRow(0).getPhysicalNumberOfCells()-1;
+			//int totalCols=ExcelWSheet.getRow(0).getPhysicalNumberOfCells()-1;
+			int totalCols=ExcelWSheet.getRow(0).getPhysicalNumberOfCells()-3;
 
 			// you can write a function as well to get Column count
 
@@ -136,6 +139,44 @@ public class ExcelUtils {
 
 		}
 
+	}
+	/**
+	 * Write Result and actual to excel file
+	 * @param row
+	 * @param actual
+	 * @param result
+	 */
+	public static void WriteResult(int row,String actual,String result) {
+		int totalCols=ExcelWSheet.getRow(0).getPhysicalNumberOfCells();
+		XSSFRow rowCurrent=ExcelWSheet.getRow(row);
+		XSSFCell cellActual=rowCurrent.getCell(totalCols-2);
+		if (cellActual == null) {
+			cellActual = rowCurrent.createCell(totalCols-2);
+	    }
+		cellActual.setCellType(Cell.CELL_TYPE_STRING);
+		cellActual.setCellValue(actual);
+		XSSFCell cellResult=rowCurrent.getCell(totalCols-1);
+		if (cellResult == null) {
+			cellResult = rowCurrent.createCell(totalCols-1);
+	    }
+		cellResult.setCellType(Cell.CELL_TYPE_STRING);
+		cellResult.setCellValue(result);
+		
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(filePath);
+			ExcelWBook.write(fos);
+			fos.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
 	}
 
 }

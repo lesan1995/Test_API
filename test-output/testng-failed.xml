@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="-1" name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <parameter name="API_PREFIX" value="api/v1"/>
-  <parameter name="AUTH_PASSWORD" value="1231231234"/>
-  <parameter name="AUTH_EMAIL" value="rohan.ana@example.com"/>
-  <parameter name="APP_URL" value="http://35.174.137.190"/>
   <test name="Default test(failed)">
     <classes>
       <class name="test_case.TC_Login">

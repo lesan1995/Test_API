@@ -8,11 +8,24 @@
 <body>
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
-<tr><th colspan="7">Default suite</th></tr>
-<tr><td><a href="#t0">Default test</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">5,189</td><td></td><td></td></tr>
+<tr><th colspan="7">Test-Suite</th></tr>
+<tr><td><a href="#t0">test</a></td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">10,376</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">test_case.TC_Login</td><td><a href="#m0">verifyUserCanLoginWithValidData</a></td><td rowspan="1">1521902877306</td><td rowspan="1">629</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Test-Suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="2">test_case.TC_ChangePassword</td><td><a href="#m0">ChangePassWord</a></td><td rowspan="2">1521950314408</td><td rowspan="2">929</td></tr><tr class="passedeven"><td><a href="#m1">ChangePassWord</a></td></tr></tbody>
 </table>
-<h2>Default test</h2><h3 id="m0">test_case.TC_Login#verifyUserCanLoginWithValidData</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>test</h2><h3 id="m0">test_case.TC_ChangePassword#ChangePassWord</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th><th>Parameter #3</th><th>Parameter #4</th><th>Parameter #5</th></tr><tr class="param stripe"><td>POST</td><td>/auth/change-password</td><td>Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}</td><td>{
+  &quot;current_password&quot;: &quot;4564156456&quot;,
+  &quot;new_password&quot;: &quot;789789789&quot;,
+  &quot;new_password_confirmation&quot;: &quot;789789789&quot;
+}</td><td>Message: &quot;errors.current_password_not_match&quot;
+Code: 400</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">test_case.TC_ChangePassword#ChangePassWord</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th><th>Parameter #3</th><th>Parameter #4</th><th>Parameter #5</th></tr><tr class="param stripe"><td>POST</td><td>/auth/change-password</td><td>Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}</td><td>{
+  &quot;current_password&quot;: &quot;456456456&quot;,
+  &quot;new_password&quot;: &quot;456456456&quot;,
+  &quot;new_password_confirmation&quot;: &quot;456456456&quot;
+}</td><td>Message: &quot;&quot;
+Code: 200</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>
