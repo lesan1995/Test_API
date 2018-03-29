@@ -4,8 +4,8 @@ import io.restassured.response.Response;
 
 public class Configure {
 	private String token="";
-	private String username="rohan.ana@example.com";
-	private String password="123123123";
+	private String username="";
+	private String password="";
 	/**
 	 * Init configure to get api
 	 * @param APP_URL
@@ -60,46 +60,21 @@ public class Configure {
 	 * @param expected
 	 * @param row
 	 */
-	public void TestAPI(String method,String path,String header,String token,String body,String expected,int row) {
-		String actual="";
-		String result="";
-		
-		String codeExpect,messageExpect;
-		codeExpect=expected.substring(expected.indexOf("Code:")+5).trim();
-		
-		try {
-			
-			messageExpect=expected.substring(expected.indexOf("\"")+1,expected.lastIndexOf("\""));
-		}
-		catch (Exception e) {
-			// TODO: handle exception
-			messageExpect="";
-		}
-		
+	public void TestAPI(String method,String path,String header,String token,String body,String messageExpect,String codeExpect,String dataExpect,int row) {
 		Response respo=Action.getInstance().Method(method.trim(),path.trim(),header,token, body);
 		if(respo==null) {
-			ExcelUtils.WriteResult(row, "", "SKIP");
+			ExcelUtils.WriteResult(row,"","", "", "SKIP");
 			System.out.println("SKIP");
 			return;
 		}
-		
-		String codeActual=respo.getStatusCode()+"";
-		String messageActual;
-		try {
-			messageActual=Action.getInstance().getJsonObject(respo).get("message").getAsString();
-		}
-		catch (Exception e) {
-			messageActual="";
-			// TODO: handle exception
-		}
-		actual="Message: \""+messageActual+"\"\nCode: "+codeActual;
-		
-		if(codeExpect.equals(codeActual)&&messageExpect.equals(messageActual))
+		String messageActual=Action.getInstance().getMessage(respo);
+		String codeActual=Action.getInstance().getCode(respo);
+		String dataActual=Action.getInstance().getData(respo);
+		String result="";
+		if(messageActual.equals(messageExpect)&&codeActual.equals(codeExpect)&&dataActual.equals(dataExpect))
 			result="PASS";
 		else result="FAIL";
 		System.out.println(result);
-		
-		ExcelUtils.WriteResult(row, actual, result);
-		
+		ExcelUtils.WriteResult(row, messageActual,codeActual,dataActual, result);
 	}
 }

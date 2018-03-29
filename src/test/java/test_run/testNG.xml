@@ -4,10 +4,10 @@
 	<test name="test">
 		<parameter name="APP_URL" value="http://35.174.137.190" />
 		<parameter name="API_PREFIX" value="api/v1" />
-		<parameter name="AUTH_EMAIL" value="rohan.ana@example.com" />
-		<parameter name="AUTH_PASSWORD" value="456456456" />
+		<parameter name="AUTH_EMAIL" value="manager_1@gmail.com" />
+		<parameter name="AUTH_PASSWORD" value="123123123" />
 		<classes>
-			<class name="test_case.TC_ChangePassword" />
+			<class name="test_case.TC_Profile" />
 		</classes>
 	</test>
 </suite>

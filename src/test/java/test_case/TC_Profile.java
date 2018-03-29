@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 
-public class TC_ChangePassword extends Configure {
+public class TC_Profile extends Configure {
 	
 	int row=1;
 	@Parameters({ "APP_URL", "API_PREFIX", "AUTH_EMAIL", "AUTH_PASSWORD" })
@@ -21,9 +21,9 @@ public class TC_ChangePassword extends Configure {
 	
 
 	@Test(dataProvider="Data")
-	public void ChangePassWord(String method,String path,String header,String body,String expected) {
+	public void ChangePassWord(String method,String path,String header,String body,String messageExpected,String codeExpected,String dataExpected) {
 		if(!getToken().equals("")) {
-			TestAPI(method, path, header, getToken(), body, expected,row);
+			TestAPI(method, path, header, getToken(), body, messageExpected,codeExpected,dataExpected,row);
 			row++;
 		}
 		
@@ -32,7 +32,7 @@ public class TC_ChangePassword extends Configure {
 	public Object[][] validData() throws Exception {
 		Object[][] testObjArray = null;
 		try {
-			testObjArray = ExcelUtils.getTableArray("src/main/java/data/API.xlsx", "Logout");
+			testObjArray = ExcelUtils.getTableArray("src/main/java/data/Auth.xlsx", "Profile");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

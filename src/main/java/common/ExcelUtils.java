@@ -1,7 +1,6 @@
 package common;
 
 import java.io.FileInputStream;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class ExcelUtils {
 			int totalRows = ExcelWSheet.getLastRowNum();
 			System.out.println("totalRows:"+totalRows);
 			//int totalCols=ExcelWSheet.getRow(0).getPhysicalNumberOfCells()-1;
-			int totalCols=ExcelWSheet.getRow(0).getPhysicalNumberOfCells()-3;
+			int totalCols=ExcelWSheet.getRow(0).getPhysicalNumberOfCells()-5;
 
 			// you can write a function as well to get Column count
 
@@ -146,21 +145,38 @@ public class ExcelUtils {
 	 * @param actual
 	 * @param result
 	 */
-	public static void WriteResult(int row,String actual,String result) {
+	public static void WriteResult(int row,String messageActual,String codeActual,String dataActual,String result) {
 		int totalCols=ExcelWSheet.getRow(0).getPhysicalNumberOfCells();
 		XSSFRow rowCurrent=ExcelWSheet.getRow(row);
-		XSSFCell cellActual=rowCurrent.getCell(totalCols-2);
-		if (cellActual == null) {
-			cellActual = rowCurrent.createCell(totalCols-2);
+		
+		XSSFCell cellMessageActual=rowCurrent.getCell(8);
+		if (cellMessageActual == null) {
+			cellMessageActual = rowCurrent.createCell(8);
 	    }
-		cellActual.setCellType(Cell.CELL_TYPE_STRING);
-		cellActual.setCellValue(actual);
-		XSSFCell cellResult=rowCurrent.getCell(totalCols-1);
-		if (cellResult == null) {
-			cellResult = rowCurrent.createCell(totalCols-1);
+		cellMessageActual.setCellType(Cell.CELL_TYPE_STRING);
+		cellMessageActual.setCellValue(messageActual);
+		
+		XSSFCell cellCodeActual=rowCurrent.getCell(9);
+		if (cellCodeActual == null) {
+			cellCodeActual = rowCurrent.createCell(9);
 	    }
-		cellResult.setCellType(Cell.CELL_TYPE_STRING);
-		cellResult.setCellValue(result);
+		cellCodeActual.setCellType(Cell.CELL_TYPE_STRING);
+		cellCodeActual.setCellValue(codeActual);
+		
+		XSSFCell cellDataActual=rowCurrent.getCell(10);
+		if (cellDataActual == null) {
+			cellDataActual = rowCurrent.createCell(10);
+	    }
+		cellDataActual.setCellType(Cell.CELL_TYPE_STRING);
+		cellDataActual.setCellValue(dataActual);
+		
+		XSSFCell cellResultActual=rowCurrent.getCell(11);
+		if (cellResultActual == null) {
+			cellResultActual = rowCurrent.createCell(11);
+	    }
+		cellResultActual.setCellType(Cell.CELL_TYPE_STRING);
+		cellResultActual.setCellValue(result);
+		
 		
 		FileOutputStream fos;
 		try {
@@ -171,9 +187,6 @@ public class ExcelUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 		
 		
 		

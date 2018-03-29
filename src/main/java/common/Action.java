@@ -35,7 +35,7 @@ public class Action {
 	public Response Method(String nameMethod,String path,String header,String token,String body) {
 		Object o=null;
 		Object oo=null;
-		String contentType=header.substring(header.indexOf(":")+1, header.indexOf("Authorization"));
+		String contentType="application/json";
 		try {
 			Class<?> classBy = Class.forName("common.Action");
 			Method method = classBy.getMethod("getInstance");
@@ -145,5 +145,51 @@ public class Action {
 		}
 		
 	}
+	/**
+	 * Get data from response
+	 * @param respo
+	 * @return
+	 */
+	public String getData(Response respo) {
+		String data="";
+		try {
+			data=respo.getBody().asString();
+			return data;
+		}
+		catch(Exception e) {
+			return "";
+		}
+	}
+	/**
+	 * Get message from response
+	 * @param respo
+	 * @return
+	 */
+	public String getMessage(Response respo) {
+		String message="";
+		try {
+			message=getJsonObject(respo).get("message").getAsString();
+			return message;
+		}
+		catch(Exception e) {
+			return "";
+		}
+	}
+	/**
+	 * Get code from response
+	 * @param respo
+	 * @return
+	 */
+	public String getCode(Response respo) {
+		String code="";
+		try {
+			code=respo.getStatusCode()+"";
+			return code;
+		}
+		catch(Exception e) {
+			return "";
+		}
+	}
+	
 	
 }
