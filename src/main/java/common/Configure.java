@@ -1,4 +1,9 @@
 package common;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.google.gson.JsonObject;
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -69,9 +74,44 @@ public class Configure {
 		}
 		String messageActual=Action.getInstance().getMessage(respo);
 		String codeActual=Action.getInstance().getCode(respo);
-		String dataActual=Action.getInstance().getData(respo);
+		
+		//So sanh data
+		boolean resultDataEqual=true;
+		JsonObject jsDataActualNew=new JsonObject();
+		JsonObject jsDataActual=Action.getInstance().getData(respo);
+		JsonObject jsDataExpect;
+		try {
+			
+			jsDataExpect=JSONParse.fromReponse(dataExpect, JsonObject.class);
+			
+		}
+		catch (Exception e) {
+			jsDataExpect=JSONParse.fromReponse("", JsonObject.class);
+			// TODO: handle exception
+		}
+		Pattern pattern = Pattern.compile("\"(.*?)\":");
+		Matcher matcher = pattern.matcher(dataExpect);
+		while (matcher.find())
+		{
+			String tmpMemberName=matcher.group(1);
+			String tmpValueExpect=jsDataExpect.get(tmpMemberName).getAsString().toString();
+			String tmpValueActual;
+			
+			try {
+				tmpValueActual=jsDataActual.get(tmpMemberName).getAsString();
+				jsDataActualNew.addProperty(tmpMemberName, tmpValueActual);
+			}
+			catch (Exception e) {
+				tmpValueActual="";
+				// TODO: handle exception
+			}
+			resultDataEqual=resultDataEqual&&(tmpValueActual.equals(tmpValueExpect));
+			System.out.println("tmpValueExpect:"+tmpValueExpect+",tmpValueActua:"+tmpValueActual+",result:"+resultDataEqual);
+		}
+		String dataActual=jsDataActualNew.getAsJsonObject().toString();
+		
 		String result="";
-		if(messageActual.equals(messageExpect)&&codeActual.equals(codeExpect)&&dataActual.equals(dataExpect))
+		if(messageActual.equals(messageExpect.trim())&&codeActual.equals(codeExpect.trim())&&resultDataEqual)
 			result="PASS";
 		else result="FAIL";
 		System.out.println(result);

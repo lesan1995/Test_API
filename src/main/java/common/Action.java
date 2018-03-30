@@ -2,6 +2,11 @@ package common;
 
 import static io.restassured.RestAssured.given;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.google.gson.JsonObject;
 import io.restassured.response.Response;
 
@@ -150,14 +155,12 @@ public class Action {
 	 * @param respo
 	 * @return
 	 */
-	public String getData(Response respo) {
-		String data="";
+	public JsonObject getData(Response respo) {
 		try {
-			data=respo.getBody().asString();
-			return data;
+			return JSONParse.fromReponse(getJsonObject(respo).get("data").getAsJsonObject().toString(), JsonObject.class);
 		}
 		catch(Exception e) {
-			return "";
+			return JSONParse.fromReponse("", JsonObject.class);
 		}
 	}
 	/**

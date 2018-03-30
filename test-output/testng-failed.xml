@@ -9,7 +9,7 @@
     <classes>
       <class name="test_case.TC_Profile">
         <methods>
-          <include name="ChangePassWord"/>
+          <include name="ChangePassWord" invocation-numbers="0"/>
           <include name="beforeClass"/>
         </methods>
       </class> <!-- test_case.TC_Profile -->
